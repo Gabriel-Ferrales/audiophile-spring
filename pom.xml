@@ -75,7 +75,17 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.audiophile.audiophile_backend.AudiophileBackendApplication</mainClass> <!-- Asegúrate de tener la clase principal correcta -->
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
+
 
 
 
