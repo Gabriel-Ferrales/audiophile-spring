@@ -42,9 +42,20 @@ public class ProductRestController {
             if (product.isPresent()) {
                 Product existingProduct = product.get();
                 int newSoldUnits = existingProduct.getSoldUnits() + productSaleRequest.getQuantity();
-                System.out.println("Producto encontrado: " + existingProduct.getName() + ". Unidades vendidas actuales: " + existingProduct.getSoldUnits() + ". Nuevas unidades vendidas: " + newSoldUnits);
+                int newStock = existingProduct.getStock() - productSaleRequest.getQuantity();
 
+                // Validar que el stock no sea negativo
+                if (newStock < 0) {
+                    System.out.println("Stock insuficiente para el producto con ID " + existingProduct.getId());
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Stock insuficiente para el producto: " + existingProduct.getName());
+                }
+
+                System.out.println("Producto encontrado: " + existingProduct.getName() + ". Unidades vendidas actuales: " + existingProduct.getSoldUnits() + ". Nuevas unidades vendidas: " + newSoldUnits);
+                System.out.println("Stock actual: " + existingProduct.getStock() + ". Nuevo stock: " + newStock);
+
+                // Actualizamos las unidades vendidas y el stock
                 existingProduct.setSoldUnits(newSoldUnits);
+                existingProduct.setStock(newStock);
                 productDAO.save(existingProduct);
                 System.out.println("Producto actualizado y guardado correctamente.");
             } else {
@@ -56,6 +67,7 @@ public class ProductRestController {
         System.out.println("Actualización de ventas completada con éxito.");
         return ResponseEntity.ok("Sales updated successfully");
     }
+
 
 
 
