@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "https://audiophile-fullstack-gabriel-ues.netlify.app")
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {

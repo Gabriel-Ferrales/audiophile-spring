@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import com.audiophile.audiophile_backend.entity.Product;
 
+@CrossOrigin(origins = "https://audiophile-fullstack-gabriel-ues.netlify.app")
+
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/products")
 public class ProductRestController {
